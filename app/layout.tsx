@@ -3,12 +3,13 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import SmoothScrollProvider from "@/lib/providers/smooth-scroll-provider";
 import { Toaster } from "sonner";
+import Footer from "@/components/app/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "ABE Metasystems | Autoconsommation Collective & Énergie Solaire",
-  description: "Réduisez votre facture d'électricité grâce à l'autoconsommation collective. Produisez et consommez localement votre énergie solaire avec vos voisins. Solutions pour particuliers, entreprises et collectivités.",
+  title: "ABE Metasystems | Autoconsommation Collective & Ã‰nergie Solaire",
+  description: "Réduisez votre facture d'électricité grÃ¢ce Ã  l'autoconsommation collective. Produisez et consommez localement votre énergie solaire avec vos voisins. Solutions pour particuliers, entreprises et collectivités.",
   keywords: [
     "autoconsommation collective",
     "économiser facture électricité",
@@ -32,7 +33,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://abe-metasystems.com'),
   openGraph: {
     title: "ABE Metasystems | Autoconsommation Collective",
-    description: "Réduisez votre facture d'électricité grâce à l'autoconsommation collective",
+    description: "Réduisez votre facture d'électricité grÃ¢ce Ã  l'autoconsommation collective",
     url: 'https://abe-metasystems.com',
     siteName: 'ABE Metasystems',
     locale: 'fr_FR',
@@ -41,7 +42,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: "ABE Metasystems | Autoconsommation Collective",
-    description: "Réduisez votre facture d'électricité grâce à l'autoconsommation collective",
+    description: "Réduisez votre facture d'électricité grÃ¢ce Ã  l'autoconsommation collective",
   },
   robots: {
     index: true,
@@ -62,11 +63,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr" className="scroll-smooth">
+    <html lang="fr" className="scroll-smooth" suppressHydrationWarning>
       <body className={inter.className}>
         <Toaster position="top-right" />
         <SmoothScrollProvider>
           {children}
+          <Footer />
         </SmoothScrollProvider>
       </body>
     </html>

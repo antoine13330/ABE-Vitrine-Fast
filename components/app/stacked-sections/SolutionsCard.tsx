@@ -1,0 +1,370 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
+import { Battery, TrendingDown } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { packs } from "@/lib/packs";
+
+export default function SolutionsCard() {
+  return (
+    <div className="bg-gradient-to-br from-purple-50 via-white to-red-50 relative overflow-hidden h-full">
+      {/* Gradient lumineux animé */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-br from-red-400/15 via-purple-400/10 to-transparent rounded-full blur-[150px] animate-pulse" />
+      <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-gradient-to-bl from-purple-300/20 to-transparent rounded-full blur-[100px] animate-pulse delay-1000" />
+
+      {/* Gradient subtil */}
+      <div className="absolute inset-0 bg-gradient-to-bl from-purple-50/20 via-transparent to-red-50/20" />
+
+      {/* Ondes d'énergie */}
+      <div className="absolute inset-0 overflow-hidden">
+        {[...Array(4)].map((_, j) => (
+          <motion.div
+            key={j}
+            className="absolute border border-red-400/20 rounded-full"
+            style={{
+              width: `${100 + j * 100}px`,
+              height: `${100 + j * 100}px`,
+              left: "50%",
+              top: "50%",
+              marginLeft: `${-50 - j * 50}px`,
+              marginTop: `${-50 - j * 50}px`,
+            }}
+            animate={{
+              scale: [1, 1.5, 1],
+              opacity: [0.3, 0, 0.3],
+            }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              delay: j * 0.5,
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Particules d'énergie */}
+      <div className="absolute inset-0 overflow-hidden">
+        {[...Array(12)].map((_, j) => (
+          <motion.div
+            key={j}
+            className="absolute w-1 h-1 bg-red-400/40 rounded-full"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              y: [-30, 30, -30],
+              x: [-20, 20, -20],
+              opacity: [0, 1, 0],
+              scale: [0.5, 1, 0.5],
+            }}
+            transition={{
+              duration: 5 + Math.random() * 3,
+              repeat: Infinity,
+              delay: Math.random() * 3,
+            }}
+          />
+        ))}
+      </div>
+
+      <div className="relative h-full flex flex-col justify-center px-4 sm:px-6 md:px-8 lg:px-12 py-6 sm:py-8">
+        <div className="max-w-6xl mx-auto w-full">
+          {/* Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-2 bg-primary/10 backdrop-blur-sm px-3 py-1.5 sm:px-4 sm:py-2 rounded-full mb-4 sm:mb-6 border border-primary/20"
+          >
+            <Battery className="w-3 h-3 sm:w-4 sm:h-4 text-primary" />
+            <span className="text-primary text-xs sm:text-sm font-semibold">
+              Comment?
+            </span>
+          </motion.div>
+
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black text-gray-900 mb-6 sm:mb-8 leading-[1.1]"
+          >
+            Notre proposition à votre
+            <br />
+            <span className="text-primary">transition énergétique</span>
+          </motion.h2>
+
+          {/* Packs avec progression claire */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 max-w-5xl mx-auto items-stretch">
+            {packs.map((pack, j) => {
+              const IconComponent = pack.icon;
+              return (
+                <motion.div
+                  key={j}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.3 + j * 0.1 }}
+                  className={cn(
+                    "group relative rounded-xl border transition-all duration-500 text-center flex flex-col",
+                    pack.highlight
+                      ? "bg-white/90 border-2 border-primary hover:bg-white hover:shadow-xl hover:shadow-primary/20 scale-105"
+                      : "bg-white/80 backdrop-blur-md border border-gray-200 hover:bg-white/90 hover:border-gray-300 hover:shadow-xl hover:shadow-gray-200/50"
+                  )}
+                >
+                  {pack.highlight && (
+                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary px-4 py-1 rounded-full z-10">
+                      <span className="text-white text-xs font-bold uppercase">
+                        Recommandé
+                      </span>
+                    </div>
+                  )}
+
+                  <div className="p-3 sm:p-4 pt-6 sm:pt-8 flex-1 flex flex-col justify-between">
+                    <div className="flex flex-col items-center flex-1 justify-center">
+                      <div
+                        className={cn(
+                          "p-2 sm:p-3 rounded-lg shadow-lg mb-2 sm:mb-3",
+                          pack.highlight ? "bg-primary" : "bg-gray-100"
+                        )}
+                      >
+                        <IconComponent
+                          className={cn(
+                            "w-5 h-5 sm:w-6 sm:h-6",
+                            pack.highlight ? "text-white" : "text-primary"
+                          )}
+                        />
+                      </div>
+
+                      <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-1.5 sm:mb-2 uppercase tracking-tight">
+                        {pack.slogan}
+                      </h3>
+
+                      <div className="mb-2 sm:mb-3">
+                        <p className="text-gray-700 text-sm sm:text-base font-medium mb-1">
+                          PACK {pack.title}
+                        </p>
+                        <p className="text-gray-900 text-lg sm:text-xl font-black">
+                          {pack.priceLabel}
+                        </p>
+                      </div>
+
+                      {/* Économies en petit sous les tags */}
+                      <div className="mb-3 sm:mb-4">
+                        <p className="text-green-600 text-xs sm:text-sm font-medium text-center">
+                          Économies : {pack.saving}
+                        </p>
+                      </div>
+
+                      {/* Image du produit */}
+                      <div className="mb-3">
+                      {pack.id === "starter" ? (
+                        <div className="aspect-square w-full max-w-32 mx-auto rounded-lg overflow-hidden">
+                          <img
+                            src="/img/pack/plug.png"
+                            alt="Prises intelligentes Starter Pack"
+                            className="w-full h-full object-contain"
+                          />
+                        </div>
+                      ) : pack.id === "confort" ? (
+                        <div className="aspect-square w-full max-w-32 mx-auto rounded-lg overflow-hidden">
+                          <img
+                            src="/img/pack/battery-plug.webp"
+                            alt="Batterie et prises Confort Pack"
+                            className="w-full h-full object-contain"
+                          />
+                        </div>
+                      ) : pack.id === "family" ? (
+                        <div className="aspect-video w-full max-w-48 mx-auto rounded-lg overflow-hidden">
+                          <img
+                            src="/img/pack/carport.jpg"
+                            alt="Carport solaire Family Pack"
+                            className="w-full h-full object-contain"
+                          />
+                        </div>
+                      ) : (
+                        <div className="aspect-square w-full max-w-32 mx-auto bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg flex items-center justify-center border-2 border-dashed border-gray-300">
+                          <span className="text-gray-500 text-xs font-medium text-center px-2">
+                            Image {pack.title}
+                          </span>
+                        </div>
+                      )}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Section des fonctionnalités toujours visible */}
+                  <div className="border-t border-gray-200 bg-gray-50/50">
+                    <div className="p-3 sm:p-4">
+                      <h4 className="text-xs font-semibold text-gray-800 mb-2">
+                        Fonctionnalités clés :
+                      </h4>
+                      <ul className="space-y-1 text-xs text-gray-600 min-h-[120px]">
+                        {pack.id === "starter" && (
+                          <>
+                            <li className="flex items-center gap-2">
+                              <div className="w-1 h-1 bg-primary rounded-full flex-shrink-0" />
+                              Contrôle intelligent de la consommation
+                            </li>
+                            <li className="flex items-center gap-2">
+                              <div className="w-1 h-1 bg-primary rounded-full flex-shrink-0" />
+                              Optimisation automatique des coûts
+                            </li>
+                            <li className="flex items-center gap-2">
+                              <div className="w-1 h-1 bg-primary rounded-full flex-shrink-0" />
+                              Installation en 1-2 jours
+                            </li>
+                            <li className="flex items-center gap-2">
+                              <div className="w-1 h-1 bg-primary rounded-full flex-shrink-0" />
+                              Surveillance temps réel
+                            </li>
+                            <li className="flex items-center gap-2">
+                              <div className="w-1 h-1 bg-primary rounded-full flex-shrink-0" />
+                              Contrôle à distance
+                            </li>
+                          </>
+                        )}
+                        {pack.id === "confort" && (
+                          <>
+                            <li className="flex items-center gap-2">
+                              <div className="w-1 h-1 bg-primary rounded-full flex-shrink-0" />
+                              Stockage d'énergie solaire
+                            </li>
+                            <li className="flex items-center gap-2">
+                              <div className="w-1 h-1 bg-primary rounded-full flex-shrink-0" />
+                              Autonomie renforcée
+                            </li>
+                            <li className="flex items-center gap-2">
+                              <div className="w-1 h-1 bg-primary rounded-full flex-shrink-0" />
+                              Gestion intelligente des pics
+                            </li>
+                            <li className="flex items-center gap-2">
+                              <div className="w-1 h-1 bg-primary rounded-full flex-shrink-0" />
+                              Batterie 2.5 kWh
+                            </li>
+                            <li className="flex items-center gap-2">
+                              <div className="w-1 h-1 bg-primary rounded-full flex-shrink-0" />
+                              Écran LED 5 pouces
+                            </li>
+                          </>
+                        )}
+                        {pack.id === "family" && (
+                          <>
+                            <li className="flex items-center gap-2">
+                              <div className="w-1 h-1 bg-primary rounded-full flex-shrink-0" />
+                              Production d'énergie complète
+                            </li>
+                            <li className="flex items-center gap-2">
+                              <div className="w-1 h-1 bg-primary rounded-full flex-shrink-0" />
+                              Solution collective intégrée
+                            </li>
+                            <li className="flex items-center gap-2">
+                              <div className="w-1 h-1 bg-primary rounded-full flex-shrink-0" />
+                              Accompagnement personnalisé
+                            </li>
+                            <li className="flex items-center gap-2">
+                              <div className="w-1 h-1 bg-primary rounded-full flex-shrink-0" />
+                              Carport solaire 6kW
+                            </li>
+                            <li className="flex items-center gap-2">
+                              <div className="w-1 h-1 bg-primary rounded-full flex-shrink-0" />
+                              8000 kWh/an de production
+                            </li>
+                          </>
+                        )}
+                      </ul>
+
+                    {/* Équipements inclus */}
+                    <div className="mt-3 pt-3 border-t">
+                      <h4 className="text-xs font-semibold text-gray-800 mb-1.5">
+                        Équipements inclus :
+                      </h4>
+                      <div className="flex justify-center items-center gap-2 flex-wrap min-h-[2rem]">
+                        {pack.id === "starter" && (
+                          <Badge
+                            variant="secondary"
+                            className="bg-red-100 text-red-700 hover:bg-red-100"
+                          >
+                            Switch
+                          </Badge>
+                        )}
+                        {pack.id === "confort" && (
+                          <>
+                            <Badge
+                              variant="secondary"
+                              className="bg-red-100 text-red-700 hover:bg-red-100"
+                            >
+                              Switch
+                            </Badge>
+                            <Badge
+                              variant="secondary"
+                              className="bg-blue-100 text-blue-700 hover:bg-blue-100"
+                            >
+                              Bank
+                            </Badge>
+                          </>
+                        )}
+                        {pack.id === "family" && (
+                          <>
+                            <Badge
+                              variant="secondary"
+                              className="bg-red-100 text-red-700 hover:bg-red-100"
+                            >
+                              Switch
+                            </Badge>
+                            <Badge
+                              variant="secondary"
+                              className="bg-blue-100 text-blue-700 hover:bg-blue-100"
+                            >
+                              Bank
+                            </Badge>
+                            <Badge
+                              variant="secondary"
+                              className="bg-orange-100 text-orange-700 hover:bg-orange-100"
+                            >
+                              Prodigy
+                            </Badge>
+                          </>
+                        )}
+                      </div>
+                    </div>
+                      <div className="mt-3 pt-3 border-t border-gray-200">
+                        <Button
+                          className="w-full text-xs sm:text-sm"
+                          onClick={() => {
+                            const message = `Bonjour, je suis intéressé(e) par le pack ${pack.title.toUpperCase()}. Pourriez-vous me donner plus d'informations ?`;
+                            const encodedMessage = encodeURIComponent(message);
+                            window.open(
+                              `/contact?message=${encodedMessage}`,
+                              "_blank"
+                            );
+                          }}
+                        >
+                          Choisir cette offre
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+
+          {/* Note de bas de page */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 1.0 }}
+            className="text-center text-white/40 text-xs sm:text-sm mt-6 sm:mt-8"
+          >
+            * Économies estimées basées sur une consommation moyenne. Résultats
+            variables selon utilisation.
+          </motion.p>
+        </div>
+      </div>
+    </div>
+  );
+}

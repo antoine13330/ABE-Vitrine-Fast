@@ -108,14 +108,6 @@ export default function ProfessionnelPage() {
                 {
                   title: 'ABE Thunder',
                   features: ['Tests automatisés', 'Rapports de conformité', 'Gestion de projet', 'Support prioritaire']
-                },
-                {
-                  title: 'Gestion de flotte',
-                  features: ['Vue d\'ensemble', 'Maintenance préventive', 'Historique complet', 'Export de données']
-                },
-                {
-                  title: 'Support technique',
-                  features: ['Assistance dédiée', 'Formation continue', 'Documentation complète', 'Mises à jour régulières']
                 }
               ].map((service, i) => (
                 <div key={i} className="bg-white/5 rounded-xl p-6 border border-white/10">

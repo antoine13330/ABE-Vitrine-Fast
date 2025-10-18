@@ -63,7 +63,7 @@ export function ComboBox({ options, showSearch = false, defaultValue = "", searc
                             <CommandItem
                                 key={option.value}
                                 value={option.value}
-                                onSelect={(currentValue) => {
+                                onSelect={(currentValue: string) => {
                                     setValue(currentValue === value ? "" : currentValue)
                                     setOpen(false)
                                 }}

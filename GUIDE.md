@@ -24,7 +24,7 @@
    - Scroll indicator animé
 
 ### 4. **Blocs Superposés au Scroll** (Style Arkeale) 📜
-   - **Texte de liaison**: "ABE, Producteur d'énergie national vous propose"
+   - **Texte de liaison**: "ABE producteur d'énergie national vous propose"
    
    - **Bloc 1 - Rouge**: Autoconsommation collective
      - Explication des 10km de rayon

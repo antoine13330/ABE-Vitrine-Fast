@@ -1,14 +1,8 @@
 "use client"
 
 import * as React from "react"
-import { ThemeProvider as NextThemesProvider, useTheme } from "next-themes"
-import { type ThemeProviderProps } from "next-themes/dist/types"
-import { useEffect } from "react"
+import { ThemeProvider as NextThemesProvider } from "next-themes"
 
-export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
-  const { setTheme } = useTheme()
-  useEffect(() => {
-    setTheme("light")
-  }, [setTheme])
+export function ThemeProvider({ children, ...props }: React.ComponentProps<typeof NextThemesProvider>) {
   return <NextThemesProvider {...props} defaultTheme="light">{children}</NextThemesProvider>
 }
