@@ -57,7 +57,7 @@ npm run setup
 npm run db:up
 
 # 2. Créer .env.local
-echo 'DATABASE_URL="postgresql://abe_user:abe_password@localhost:5432/abe_vitrine?schema=public"' > .env.local
+echo 'DATABASE_URL="postgresql://${DB_USER}:${DB_PASSWORD}@localhost:5432/abe_vitrine?schema=public"' > .env.local
 
 # 3. Générer Prisma et créer les tables
 npm run db:generate
@@ -231,7 +231,7 @@ npm run db:reset
 
 ### 2. Configurer les variables d'environnement
 ```env
-DATABASE_URL="postgresql://user:password@host:5432/database?sslmode=require"
+DATABASE_URL="postgresql://[DB_USER]:[DB_PASSWORD]@host:5432/database?sslmode=require"
 ```
 
 ### 3. Appliquer les migrations

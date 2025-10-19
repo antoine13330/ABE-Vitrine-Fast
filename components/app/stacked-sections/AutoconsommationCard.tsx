@@ -141,44 +141,38 @@ export default function AutoconsommationCard() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3 }}
-              className="bg-gradient-to-br from-white to-gray-50 backdrop-blur-md rounded-3xl p-6 sm:p-8 shadow-2xl border border-gray-100 max-w-lg mx-auto relative overflow-hidden"
+              className="relative"
             >
-              {/* Effet de brillance */}
-              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-red-400 to-primary"></div>
-              
-              <div className="text-center pb-6">
-                <div className="inline-flex items-center gap-2 bg-primary/10 px-4 py-2 rounded-full mb-4">
-                  <Users className="w-5 h-5 text-primary" />
-                  <p className="text-lg sm:text-xl font-bold text-primary uppercase tracking-wide">
+              <div className="bg-white rounded-2xl p-4 sm:p-6 shadow-lg border border-gray-200 max-w-lg mx-auto">
+                {/* En-tête */}
+                <div className="text-center mb-4">
+                  <h3 className="text-2xl sm:text-3xl md:text-4xl font-black text-primary uppercase">
                     Vous êtes concernés
-                  </p>
+                  </h3>
+                </div>
+
+                {/* Grille des profils */}
+                <div className="grid grid-cols-2 gap-3">
+                  {[
+                    { icon: Home, label: "Particulier" },
+                    { icon: Users, label: "Commerçant" },
+                    { icon: Building2, label: "Collectivité" },
+                    { icon: Building2, label: "Entreprise" },
+                  ].map((item, j) => (
+                    <div
+                      key={j}
+                      className="aspect-square flex flex-col items-center justify-center gap-2 p-3 rounded-lg bg-gray-50 border border-gray-200"
+                    >
+                      <div className="p-2 bg-primary/10 rounded-lg">
+                        <item.icon className="w-8 h-8 sm:w-10 sm:h-10 text-primary" />
+                      </div>
+                      <span className="text-base sm:text-lg font-bold text-gray-900">
+                        {item.label}
+                      </span>
+                    </div>
+                  ))}
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-4 sm:gap-5 mb-6 sm:mb-8 justify-items-center">
-                {[
-                  { icon: Home, label: "Particulier" },
-                  { icon: Building2, label: "Collectivité" },
-                  { icon: Users, label: "Commerçant" },
-                  { icon: Building2, label: "Entreprise" },
-                ].map((item, j) => (
-                  <motion.div
-                    key={j}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.4 + j * 0.1 }}
-                    className="flex flex-col items-center gap-3 sm:gap-4 backdrop-blur-md p-4 sm:p-5 rounded-2xl shadow-xl bg-white border border-gray-100 w-full max-w-[140px] sm:max-w-[160px] h-fit hover:shadow-2xl hover:scale-105 hover:border-primary/30 transition-all duration-300 group"
-                  >
-                    <div className="p-3 bg-primary/10 rounded-xl group-hover:bg-primary/20 transition-colors">
-                      <item.icon className="w-6 h-6 sm:w-7 sm:h-7 text-primary" />
-                    </div>
-                    <span className="text-gray-900 text-sm sm:text-base text-center font-bold leading-tight group-hover:text-primary transition-colors">
-                      {item.label}
-                    </span>
-                  </motion.div>
-                ))}
-              </div>
-             
             </motion.div>
           </div>
         </div>

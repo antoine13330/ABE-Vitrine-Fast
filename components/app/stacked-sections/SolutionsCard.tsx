@@ -151,6 +151,17 @@ export default function SolutionsCard() {
                         </p>
                       </div>
 
+                      {/* Point important pour Family Pack */}
+                      {pack.id === "family" && (
+                        <div className="mb-2 sm:mb-3">
+                          <div className="bg-green-100 border border-green-300 rounded-lg p-1 sm:p-1.5 text-center">
+                            <p className="text-green-800 text-xs font-semibold">
+                              ⭐ Accès à l'énergie à 75% du prix EDF
+                            </p>
+                          </div>
+                        </div>
+                      )}
+
                       {/* Économies en petit sous les tags */}
                       <div className="mb-3 sm:mb-4">
                         <p className="text-green-600 text-xs sm:text-sm font-medium text-center">
@@ -178,8 +189,9 @@ export default function SolutionsCard() {
                         </div>
                       ) : pack.id === "family" ? (
                         <div className="aspect-video w-full max-w-48 mx-auto rounded-lg overflow-hidden">
+                          {/* filter to make the image with more contrast and lowered brightness / highlights */}
                           <img
-                            src="/img/pack/carport.jpg"
+                            src="/img/pack/carport-above.jpg"
                             alt="Carport solaire Family Pack"
                             className="w-full h-full object-contain"
                           />

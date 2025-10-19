@@ -6,14 +6,14 @@
 ```
 Host:     localhost
 Port:     5432
-User:     abe_user
-Password: abe_password
+User:     [VARIABLE_DB_USER]
+Password: [VARIABLE_DB_PASSWORD]
 Database: abe_vitrine
 ```
 
 ### URL de connexion Prisma
 ```
-DATABASE_URL="postgresql://abe_user:abe_password@localhost:5432/abe_vitrine?schema=public"
+DATABASE_URL="postgresql://[DB_USER]:[DB_PASSWORD]@localhost:5432/abe_vitrine?schema=public"
 ```
 
 ## Adminer (Interface Web PostgreSQL)
@@ -22,8 +22,8 @@ DATABASE_URL="postgresql://abe_user:abe_password@localhost:5432/abe_vitrine?sche
 - **URL**: http://localhost:8080
 - **Système**: PostgreSQL
 - **Serveur**: postgres
-- **Utilisateur**: abe_user
-- **Mot de passe**: abe_password
+- **Utilisateur**: [VARIABLE_DB_USER]
+- **Mot de passe**: [VARIABLE_DB_PASSWORD]
 - **Base de données**: abe_vitrine
 
 ## Prisma Studio

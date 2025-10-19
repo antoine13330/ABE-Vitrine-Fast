@@ -18,7 +18,7 @@ setup: ## Configuration initiale complète
 	@echo "📊 Application du schéma Prisma..."
 	npx prisma db push
 	@echo "✅ Configuration terminée! Créez votre fichier .env.local avec:"
-	@echo "DATABASE_URL=\"postgresql://abe_user:abe_password@localhost:5432/abe_vitrine?schema=public\""
+	@echo "DATABASE_URL=\"postgresql://$${DB_USER}:$${DB_PASSWORD}@localhost:5432/abe_vitrine?schema=public\""
 
 db-up: ## Démarrer PostgreSQL
 	docker-compose up -d

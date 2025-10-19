@@ -12,7 +12,7 @@ SMTP_HOST=mail.abe-metasystems.com
 SMTP_PORT=587
 SMTP_SECURE=false
 SMTP_USER=contact@abe-metasystems.com
-SMTP_PASSWORD=votre_mot_de_passe_email
+SMTP_PASSWORD=[VOTRE_MOT_DE_PASSE_EMAIL]
 ```
 
 ### 2. Obtenir les informations SMTP
@@ -46,7 +46,7 @@ SMTP_HOST=mail.abe-metasystems.com
 SMTP_PORT=587
 SMTP_SECURE=false  # false pour TLS sur port 587
 SMTP_USER=contact@abe-metasystems.com
-SMTP_PASSWORD=VotreMdP!Sécurisé123
+SMTP_PASSWORD=[VOTRE_MOT_DE_PASSE_EMAIL]
 ```
 
 **Alternative avec SSL :**
@@ -55,7 +55,7 @@ SMTP_HOST=mail.abe-metasystems.com
 SMTP_PORT=465
 SMTP_SECURE=true  # true pour SSL sur port 465
 SMTP_USER=contact@abe-metasystems.com
-SMTP_PASSWORD=VotreMdP!Sécurisé123
+SMTP_PASSWORD=[VOTRE_MOT_DE_PASSE_EMAIL]
 ```
 
 ### 4. Tester la configuration

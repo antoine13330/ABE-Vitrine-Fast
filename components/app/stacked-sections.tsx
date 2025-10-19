@@ -36,7 +36,7 @@ const StickyCard = ({
   if (isMobile) {
     // Mode mobile : pas de sticky, taille libre
     return (
-      <div className="w-full max-w-4xl mx-auto px-4 mb-8">
+      <div className="w-full max-w-4xl mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

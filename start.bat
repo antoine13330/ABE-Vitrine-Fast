@@ -42,7 +42,7 @@ if errorlevel 1 (
 
 echo [5/5] Creation du fichier .env.local...
 if not exist .env.local (
-    echo DATABASE_URL="postgresql://abe_user:abe_password@localhost:5432/abe_vitrine?schema=public"> .env.local
+    echo DATABASE_URL="postgresql://%DB_USER%:%DB_PASSWORD%@localhost:5432/abe_vitrine?schema=public"> .env.local
     echo NODE_ENV="development">> .env.local
     echo Fichier .env.local cree avec succes
 ) else (

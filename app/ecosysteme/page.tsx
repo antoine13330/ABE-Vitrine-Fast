@@ -351,9 +351,9 @@ export default function EcosystemePage() {
               >
                 {/* Content */}
                 <div className={index % 2 === 1 ? 'lg:col-start-2' : ''}>
-                  <div className="space-y-6 text-center lg:text-left flex flex-col items-center lg:items-start">
+                  <div className="space-y-6 text-center lg:text-left flex flex-col items-center lg:items-start lg:justify-start">
                     <div className="flex flex-col lg:flex-row items-center gap-4">
-                      <div className={`p-3 rounded-xl bg-${product.color}-100`}>
+                      <div className={`p-3 rounded-xl bg-${product.color}-100 lg:hidden`}>
                         <product.icon className={`w-8 h-8 text-${product.color}-600`} />
                       </div>
                       <div className="text-center lg:text-left">
@@ -383,7 +383,7 @@ export default function EcosystemePage() {
                       <h4 className="text-lg font-bold text-gray-900 mb-4 text-center lg:text-left">Fonctionnalités clés</h4>
                       <div className="grid grid-cols-1 gap-3">
                         {product.features.slice(0, 3).map((feature, featureIndex) => (
-                          <div key={featureIndex} className="flex items-start gap-3">
+                          <div key={featureIndex} className="flex items-start gap-3 justify-center lg:justify-start">
                             <CheckCircle className={`w-5 h-5 text-${product.color}-500 mt-0.5 flex-shrink-0`} />
                             <span className="text-gray-700 text-sm">
                               {feature}
@@ -394,9 +394,9 @@ export default function EcosystemePage() {
                     </div>
 
                     {/* Tags/Benefits */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
+                    <div className="flex flex-col sm:grid sm:grid-cols-2 gap-4 w-full items-center sm:items-stretch">
                       {product.benefits.map((benefit, benefitIndex) => (
-                        <div key={benefitIndex} className="flex items-center justify-center lg:justify-start gap-3">
+                        <div key={benefitIndex} className="flex items-center justify-center sm:justify-start gap-3">
                           <benefit.icon className={`w-5 h-5 text-${product.color}-500`} />
                           <span className="text-gray-700 font-medium">
                             {benefit.text}
@@ -405,22 +405,6 @@ export default function EcosystemePage() {
                       ))}
                     </div>
 
-                    <div className="flex flex-col sm:flex-row gap-4 w-full lg:w-auto justify-center lg:justify-start">
-                      <Button 
-                        className="group w-full sm:w-auto"
-                        onClick={() => window.location.href = '/ecosysteme'}
-                      >
-                        En savoir plus
-                        <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                      </Button>
-                      <Button 
-                        variant="outline" 
-                        className="w-full sm:w-auto"
-                        onClick={() => window.location.href = '/contact'}
-                      >
-                        Demander un devis
-                      </Button>
-                    </div>
                   </div>
                 </div>
 

@@ -39,7 +39,7 @@ fi
 echo "[5/5] Création du fichier .env.local..."
 if [ ! -f .env.local ]; then
     cat > .env.local << EOF
-DATABASE_URL="postgresql://abe_user:abe_password@localhost:5432/abe_vitrine?schema=public"
+DATABASE_URL="postgresql://${DB_USER}:${DB_PASSWORD}@localhost:5432/abe_vitrine?schema=public"
 NODE_ENV="development"
 EOF
     echo "Fichier .env.local créé avec succès"

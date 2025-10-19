@@ -19,7 +19,7 @@ docker-compose ps
 Créez un fichier `.env.local` à la racine du projet avec :
 
 ```env
-DATABASE_URL="postgresql://abe_user:abe_password@localhost:5432/abe_vitrine?schema=public"
+DATABASE_URL="postgresql://[DB_USER]:[DB_PASSWORD]@localhost:5432/abe_vitrine?schema=public"
 NODE_ENV="development"
 ```
 
@@ -49,7 +49,7 @@ Ouvrez `http://localhost:8080` dans votre navigateur
 - **Système** : PostgreSQL
 - **Serveur** : postgres
 - **Utilisateur** : abe_user
-- **Mot de passe** : abe_password
+- **Mot de passe** : [VARIABLE_DB_PASSWORD]
 - **Base de données** : abe_vitrine
 
 ## 📋 Commandes utiles

@@ -48,7 +48,7 @@ npm install
 npm run db:up
 
 # 3. Créer le fichier .env.local
-echo 'DATABASE_URL="postgresql://abe_user:abe_password@localhost:5432/abe_vitrine?schema=public"' > .env.local
+echo 'DATABASE_URL="postgresql://${DB_USER}:${DB_PASSWORD}@localhost:5432/abe_vitrine?schema=public"' > .env.local
 
 # 4. Générer Prisma et créer les tables
 npm run db:generate
