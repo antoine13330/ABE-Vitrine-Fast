@@ -9,13 +9,13 @@ import { packs } from "@/lib/packs";
 
 export default function SolutionsCard() {
   return (
-    <div className="bg-gradient-to-br from-purple-50 via-white to-red-50 relative overflow-hidden h-full">
+    <div className="bg-gradient-to-br from-gray-50 to-white relative overflow-hidden h-full">
       {/* Gradient lumineux animé */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-br from-red-400/15 via-purple-400/10 to-transparent rounded-full blur-[150px] animate-pulse" />
       <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-gradient-to-bl from-purple-300/20 to-transparent rounded-full blur-[100px] animate-pulse delay-1000" />
 
       {/* Gradient subtil */}
-      <div className="absolute inset-0 bg-gradient-to-bl from-purple-50/20 via-transparent to-red-50/20" />
+      <div className="absolute inset-0 bg-gradient-to-bl from-gray-50/20 via-transparent to-gray-50/20" />
 
       {/* Ondes d'énergie */}
       <div className="absolute inset-0 overflow-hidden">
@@ -124,9 +124,10 @@ export default function SolutionsCard() {
 
                   <div className="p-3 sm:p-4 pt-6 sm:pt-8 flex-1 flex flex-col justify-between">
                     <div className="flex flex-col items-center flex-1 justify-center">
+                      {/* Logo tout en haut */}
                       <div
                         className={cn(
-                          "p-2 sm:p-3 rounded-lg shadow-lg mb-2 sm:mb-3",
+                          "p-2 sm:p-3 rounded-lg shadow-lg mb-4",
                           pack.highlight ? "bg-primary" : "bg-gray-100"
                         )}
                       >
@@ -138,39 +139,20 @@ export default function SolutionsCard() {
                         />
                       </div>
 
-                      <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-1.5 sm:mb-2 uppercase tracking-tight">
-                        {pack.slogan}
-                      </h3>
-
-                      <div className="mb-2 sm:mb-3">
-                        <p className="text-gray-700 text-sm sm:text-base font-medium mb-1">
-                          PACK {pack.title}
-                        </p>
-                        <p className="text-gray-900 text-lg sm:text-xl font-black">
-                          {pack.priceLabel}
-                        </p>
-                      </div>
-
-                      {/* Point important pour Family Pack */}
-                      {pack.id === "family" && (
-                        <div className="mb-2 sm:mb-3">
-                          <div className="bg-green-100 border border-green-300 rounded-lg p-1 sm:p-1.5 text-center">
-                            <p className="text-green-800 text-xs font-semibold">
-                              ⭐ Accès à l'énergie à 75% du prix EDF
-                            </p>
-                          </div>
+                      {/* Titre */}
+                      <div className="text-center mb-4">
+                        <div className="bg-primary/10 px-3 py-1 rounded-full inline-block mb-2">
+                          <p className="text-primary text-sm sm:text-base font-bold uppercase tracking-wide">
+                            PACK {pack.title}
+                          </p>
                         </div>
-                      )}
-
-                      {/* Économies en petit sous les tags */}
-                      <div className="mb-3 sm:mb-4">
-                        <p className="text-green-600 text-xs sm:text-sm font-medium text-center">
-                          Économies : {pack.saving}
-                        </p>
+                        <h3 className="text-sm sm:text-base font-bold text-gray-900 uppercase tracking-tight leading-tight whitespace-nowrap">
+                          {pack.slogan}
+                        </h3>
                       </div>
 
                       {/* Image du produit */}
-                      <div className="mb-3">
+                      <div className="mb-4">
                       {pack.id === "starter" ? (
                         <div className="aspect-square w-full max-w-32 mx-auto rounded-lg overflow-hidden">
                           <img
@@ -204,6 +186,27 @@ export default function SolutionsCard() {
                         </div>
                       )}
                       </div>
+
+                      {/* Prix et économies en bas de l'image */}
+                      <div className="text-center mb-3">
+                        <p className="text-gray-900 text-xl sm:text-2xl font-black mb-2">
+                          {pack.priceLabel}
+                        </p>
+                        <p className="text-green-600 text-sm sm:text-base font-semibold">
+                          Économies : {pack.saving}
+                        </p>
+                      </div>
+
+                      {/* Point important pour Family Pack */}
+                      {pack.id === "family" && (
+                        <div className="mb-2 sm:mb-3">
+                          <div className="bg-green-100 border border-green-300 rounded-lg p-1 sm:p-1.5 text-center">
+                            <p className="text-green-800 text-xs font-semibold">
+                              ⭐ Accès à l'énergie à 75% du prix EDF
+                            </p>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
 

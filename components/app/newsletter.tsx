@@ -49,7 +49,12 @@ export default function Newsletter() {
   }
 
   return (
-    <section className="relative pb-32 overflow-hidden" aria-labelledby="newsletter-heading">
+    <section className="relative pb-32 pt-24 overflow-hidden bg-gradient-to-br from-gray-50 to-white" aria-labelledby="newsletter-heading">
+      {/* Background elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl" />
+      </div>
       
       <div className="container mx-auto px-4 relative z-10">
         <motion.div

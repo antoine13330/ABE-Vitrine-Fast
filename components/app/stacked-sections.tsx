@@ -159,8 +159,14 @@ const DesktopStackedSections = () => {
   });
 
   return (
-    <section className="py-20">
-      <div className="container mx-auto text-center mb-12 sm:mb-16">
+    <section className="relative py-20 bg-gradient-to-br from-gray-50 to-white">
+      {/* Background elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl" />
+      </div>
+      
+      <div className="relative z-10 container mx-auto text-center mb-12 sm:mb-16">
         <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-gray-900 mb-6 sm:mb-8 leading-tight">
           ABE producteur national d'énergie collective
           <span className="text-primary"> vous propose</span>
@@ -170,7 +176,7 @@ const DesktopStackedSections = () => {
 
       <main
         ref={container}
-        className="relative flex w-full flex-col items-center justify-center pb-[20vh] pt-[5vh]"
+        className="relative z-10 flex w-full flex-col items-center justify-center pb-[20vh] pt-[5vh]"
       >
         {testCards.map((card, i) => {
           const targetScale = Math.max(

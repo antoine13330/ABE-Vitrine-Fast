@@ -556,6 +556,39 @@ export default function SimulateurPage() {
 
                         {simulationData.hasParkingSpace ? (
                           <>
+                            {/* Image du carport ABE */}
+                            <div className="bg-gradient-to-br from-primary/5 to-blue-50 border border-primary/20 rounded-xl p-6 text-center">
+                              <div className="mb-4">
+                                <Image
+                                  src="/img/pack/carport-above.jpg"
+                                  alt="Carport solaire ABE - Vue aérienne"
+                                  width={400}
+                                  height={250}
+                                  className="rounded-lg shadow-lg mx-auto"
+                                />
+                              </div>
+                              <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                                🚗 Carport Solaire ABE
+                              </h3>
+                              <p className="text-sm text-gray-600 mb-3">
+                                6 kWc de production + 2 places de parking gratuites
+                              </p>
+                              <div className="flex justify-center gap-4 text-xs text-gray-500">
+                                <span className="flex items-center gap-1">
+                                  <Sun className="w-4 h-4 text-yellow-500" />
+                                  Production solaire
+                                </span>
+                                <span className="flex items-center gap-1">
+                                  <Car className="w-4 h-4 text-blue-500" />
+                                  2 places parking
+                                </span>
+                                <span className="flex items-center gap-1">
+                                  <Battery className="w-4 h-4 text-green-500" />
+                                  Autoconsommation
+                                </span>
+                              </div>
+                            </div>
+
                             <div>
                               <Label className="text-sm font-medium text-gray-700">
                                 Exposition solaire de votre parking
@@ -621,7 +654,7 @@ export default function SimulateurPage() {
                                 <CheckCircle className="w-5 h-5 text-green-600 mt-0.5" />
                                 <div className="text-sm text-green-800">
                                   <p className="font-semibold mb-1">💰 Économies avec ABE</p>
-                                  <p>20,59% d'économies sur votre facture = {Math.round(simulationData.monthlyElectricityBill * 0.2059)}€/mois</p>
+                                  <p>25% d'économies sur votre facture = {Math.round(simulationData.monthlyElectricityBill * 0.25)}€/mois</p>
                                 </div>
                               </div>
                             </div>
@@ -701,7 +734,7 @@ export default function SimulateurPage() {
                                     </div>
                                     
                                     <div className="flex justify-between items-center py-3 bg-blue-50 px-6">
-                                      <span className="text-gray-700 font-medium">☀️ Revenus solaire (6 kWc)</span>
+                                      <span className="text-gray-700 font-medium">☀️ Revenus solaire (6 kWc)*</span>
                                       <span className="font-bold text-blue-600 text-lg">{Math.round(previewResults.monthlySolarRevenue * 12)}€/an</span>
                                     </div>
                                   </div>
@@ -790,10 +823,15 @@ export default function SimulateurPage() {
 
                 {/* Disclaimer - Centré horizontalement */}
                 <div className="flex justify-center mt-4">
-                  <p className="text-xs text-gray-500 max-w-md">
-                    *Estimations fondées sur les tarifs 2025 : EDF 0.1952€/kWh vs ABE 0.155€/kWh. 
-                    Carport 6 kWc inclus gratuitement. Revenus solaire : 0.08€/kWh vs 0.04€/kWh EDF.
-                  </p>
+                  <div className="text-xs text-gray-500 max-w-md space-y-1">
+                    <p>
+                      *Estimations fondées sur les tarifs 2025 : EDF 0.1952€/kWh vs ABE 0.155€/kWh. 
+                      Carport 6 kWc inclus gratuitement. Revenus solaire : 0.08€/kWh vs 0.04€/kWh EDF.
+                    </p>
+                    <p>
+                      *Les revenus solaires sont basés sur des données provenant d'un cas d'étude type et peuvent varier selon votre localisation, l'ensoleillement et les conditions d'installation.
+                    </p>
+                  </div>
                 </div>
 
                 {/* Navigation - Centré horizontalement */}

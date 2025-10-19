@@ -5,7 +5,7 @@ import { Zap, TrendingDown, Home, Sun, Users, Building2 } from "lucide-react";
 
 export default function AutoconsommationCard() {
   return (
-    <div className="bg-gradient-to-br from-red-50 via-white to-orange-50 relative overflow-hidden h-full">
+    <div className="bg-gradient-to-br from-gray-50 to-white relative overflow-hidden h-full">
       {/* Gradients animés */}
       <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-red-200/30 to-transparent rounded-full blur-3xl animate-pulse" />
       <div className="absolute bottom-0 right-0 w-80 h-80 bg-gradient-to-tl from-orange-200/30 to-transparent rounded-full blur-3xl animate-pulse delay-1000" />
@@ -125,7 +125,7 @@ export default function AutoconsommationCard() {
                 </div>
                 <div>
                   <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-1">
-                    Rayons de 10 kms
+                    Rayon de 10 kms
                   </h3>
                   <p className="text-gray-600 text-xs sm:text-sm leading-relaxed">
                     Organisez-vous localement pour produire votre énergie,
@@ -143,16 +143,16 @@ export default function AutoconsommationCard() {
               transition={{ delay: 0.3 }}
               className="relative"
             >
-              <div className="bg-white rounded-2xl p-4 sm:p-6 shadow-lg border border-gray-200 max-w-lg mx-auto">
+              <div className="bg-white rounded-xl sm:rounded-2xl p-3 sm:p-6 shadow-lg border border-gray-200 max-w-xs sm:max-w-lg mx-auto">
                 {/* En-tête */}
-                <div className="text-center mb-4">
-                  <h3 className="text-2xl sm:text-3xl md:text-4xl font-black text-primary uppercase">
+                <div className="text-center mb-3 sm:mb-4">
+                  <h3 className="text-lg sm:text-3xl md:text-4xl font-black text-primary uppercase">
                     Vous êtes concernés
                   </h3>
                 </div>
 
                 {/* Grille des profils */}
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-2 gap-2 sm:gap-3">
                   {[
                     { icon: Home, label: "Particulier" },
                     { icon: Users, label: "Commerçant" },
@@ -161,12 +161,12 @@ export default function AutoconsommationCard() {
                   ].map((item, j) => (
                     <div
                       key={j}
-                      className="aspect-square flex flex-col items-center justify-center gap-2 p-3 rounded-lg bg-gray-50 border border-gray-200"
+                      className="aspect-square flex flex-col items-center justify-center gap-1 sm:gap-2 p-2 sm:p-3 rounded-lg bg-gray-50 border border-gray-200"
                     >
-                      <div className="p-2 bg-primary/10 rounded-lg">
-                        <item.icon className="w-8 h-8 sm:w-10 sm:h-10 text-primary" />
+                      <div className="p-1.5 sm:p-2 bg-primary/10 rounded-lg">
+                        <item.icon className="w-6 h-6 sm:w-10 sm:h-10 text-primary" />
                       </div>
-                      <span className="text-base sm:text-lg font-bold text-gray-900">
+                      <span className="text-xs sm:text-lg font-bold text-gray-900">
                         {item.label}
                       </span>
                     </div>
