@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import { 
   Zap, 
   Plug, 
@@ -30,6 +31,7 @@ import { Badge } from '@/components/ui/badge'
 import Navbar from '@/components/app/navbar'
 
 export default function EcosystemePage() {
+  const router = useRouter()
   const [isMobile, setIsMobile] = useState(false)
   const [energyLines, setEnergyLines] = useState<Array<{
     width: number
@@ -65,7 +67,7 @@ export default function EcosystemePage() {
   const ecosystemProducts = [
     {
       id: 'solar-carport',
-      title: 'TruePower® Prodigy',
+      title: 'Pack Family',
       subtitle: 'Carport solaire 6kW',
       icon: Sun,
       color: 'orange',
@@ -76,7 +78,7 @@ export default function EcosystemePage() {
         'Protection de 2 véhicules contre les intempéries',
         'Structure en aluminium anodisé résistante et esthétique',
         'Panneaux monocristallins haute performance 400W',
-        'Intégration parfaite avec l\'écosystème TruePower®',
+        'Intégration parfaite avec l\'écosystème ABE',
         'Installation professionnelle avec garantie constructeur'
       ],
       specifications: [
@@ -98,7 +100,7 @@ export default function EcosystemePage() {
     },
     {
       id: 'battery-storage',
-      title: 'TruePower® Bank',
+      title: 'Pack Confort',
       subtitle: 'Batterie intelligente avec onduleur solaire intégré',
       icon: Battery,
       color: 'blue',
@@ -134,7 +136,7 @@ export default function EcosystemePage() {
     },
     {
       id: 'smart-plugs',
-      title: 'TruePower® Switch',
+      title: 'Pack Starter',
       subtitle: 'Prises intelligentes pour une consommation optimisée',
       icon: Plug,
       color: 'red',
@@ -149,7 +151,7 @@ export default function EcosystemePage() {
         'Pack de 4 prises intelligentes'
       ],
       specifications: [
-        { label: 'Articles', value: '4 TruePower Switch' },
+        { label: 'Articles', value: '4 prises intelligentes' },
         { label: 'Protocole', value: 'IEEE 802.11b/g/n' },
         { label: 'WiFi', value: '2.4 GHz' },
         { label: 'Tension', value: 'AC 220-240V ~ 50/60Hz' },
@@ -237,7 +239,7 @@ export default function EcosystemePage() {
             >
               <Zap className="w-4 h-4 text-primary" />
               <span className="text-primary text-sm font-semibold">
-                Écosystème TruePower™
+                Produits ABE
               </span>
             </motion.div>
 
@@ -247,7 +249,7 @@ export default function EcosystemePage() {
               transition={{ delay: 0.2, duration: 0.8 }}
               className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-gray-900 mb-6 leading-tight"
             >
-              L'écosystème ABE
+              Les offres ABE
               <br />
               <span className="text-primary">pour votre autonomie énergétique</span>
             </motion.h1>
@@ -258,8 +260,7 @@ export default function EcosystemePage() {
               transition={{ delay: 0.4, duration: 0.8 }}
               className="text-lg sm:text-xl text-gray-600 mb-8 max-w-4xl mx-auto leading-relaxed"
             >
-              Découvrez comment nos trois technologies complémentaires transforment votre habitation 
-              en centrale énergétique intelligente et rentable.
+              Découvrez comme nous pouvons vous aider à réduire vos factures d'électricité et augmenter vos revenus.
             </motion.p>
 
             <motion.div
@@ -268,8 +269,12 @@ export default function EcosystemePage() {
               transition={{ delay: 0.6, duration: 0.8 }}
               className="flex flex-col sm:flex-row gap-4 justify-center"
             >
-              <Button size="lg" className="group shadow-lg shadow-primary/20">
-                Simuler mes économies
+              <Button 
+                size="lg" 
+                className="group shadow-lg shadow-primary/20"
+                onClick={() => router.push('/simuler')}
+              >
+                Simuler vos économies
                 <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Button>
             
@@ -278,73 +283,21 @@ export default function EcosystemePage() {
         </div>
       </section>
 
-      {/* Ecosystem Benefits */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px 0px" }}
-            className="text-center mb-12" 
-          >
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-              Pourquoi choisir l'écosystème ABE ?
-            </h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              Une solution complète qui maximise vos économies et votre impact environnemental
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">  
-            {ecosystemBenefits.map((benefit, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px 0px" }}
-                transition={{ delay: index * 0.1 }}
-                className="text-center group"
-              >
-                <div className={`inline-flex items-center justify-center w-16 h-16 bg-gray-100 rounded-2xl mb-4 group-hover:bg-${benefit.color.split('-')[1]}-100 transition-colors`}>
-                  <benefit.icon className={`w-8 h-8 ${benefit.color}`} />
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">
-                  {benefit.title}
-                </h3>
-                <p className="text-gray-600">
-                  {benefit.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+  
 
       {/* Products Section */}
       <section className="py-20 bg-gradient-to-br from-gray-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px 0px" }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-              Nos trois technologies clés
-            </h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              Chaque composant de l'écosystème ABE est conçu pour fonctionner en parfaite synergie
-            </p>
-          </motion.div>
+      
 
           <div className="space-y-24">
             {ecosystemProducts.map((product, index) => (
               <motion.div
                 key={product.id}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px 0px" }}
-                transition={{ delay: index * 0.2 }}
+                id={product.id}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 + (index * 0.1), duration: 0.8, ease: "easeOut" }}
                 className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${
                   index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''
                 }`}
@@ -367,16 +320,85 @@ export default function EcosystemePage() {
                     </div>
 
                     <p className="text-gray-600 leading-relaxed">
-                      {product.id === 'smart-plugs' && 
-                        'La TruePower® Switch révolutionne la gestion de votre consommation énergétique. Avec son wattmètre intégré et son contrôle à distance, vous maîtrisez parfaitement vos dépenses d\'électricité. Compatible avec les principaux écosystèmes domotiques, elle s\'intègre parfaitement dans votre maison intelligente.'
-                      }
-                      {product.id === 'battery-storage' && 
-                        'La TruePower® Bank est bien plus qu\'une simple batterie. Avec son onduleur solaire intégré et son écran LED 5 pouces, elle vous offre une gestion complète de votre énergie. Chargez via le solaire ou le réseau, alimentez tous vos appareils, et transportez-la facilement grâce à ses roulettes intégrées.'
-                      }
-                      {product.id === 'solar-carport' && 
-                        'Notre carport solaire 6kW combine protection de véhicules et production d\'énergie verte. Avec ses panneaux monocristallins haute performance et sa structure en aluminium anodisé, il s\'intègre parfaitement dans votre environnement tout en produisant jusqu\'à 8000 kWh d\'énergie renouvelable par an.'
-                      }
+                      {product.id === 'smart-plugs' && (
+                        <>
+                          Le Pack Starter mise tout sur ses <strong>4 prises intelligentes</strong>, véritables sentinelles de votre consommation électrique. Transformez n'importe quel appareil en dispositif connecté et optimisez votre usage énergétique en temps réel, pour des économies immédiates et durables.
+                        </>
+                      )}
+                      {product.id === 'battery-storage' && (
+                        <>
+                          Au cœur du Pack Confort trône sa <strong>batterie 10kWh</strong> munie d'un onduleur solaire intégré. Cette centrale électrique portable capte l'énergie gratuite du soleil et des tarifs préférentiels nocturnes pour alimenter votre foyer 24h/24, même en cas de panne réseau.
+                        </>
+                      )}
+                      {product.id === 'solar-carport' && (
+                        <>
+                          Le Pack Family se distingue par son <strong>carport solaire 6kW</strong>, génie architectural qui transforme votre place de parking en usine à électricité. Protégez vos véhicules des intempéries tout en produisant 8000 kWh d'énergie verte annuellement - une innovation qui valorise chaque mètre carré de votre propriété.
+                        </>
+                      )}
                     </p>
+
+                    {/* Navigation vers les autres packs */}
+                    {(product.id === 'solar-carport' || product.id === 'battery-storage') && (
+                      <div className="mt-6 p-4 bg-gray-50 rounded-lg">
+                        <h5 className="text-sm font-semibold text-gray-800 mb-3">Contient le pack :</h5>
+                        <div className="flex flex-wrap gap-2">
+                          {product.id === 'solar-carport' && (
+                            <>
+                              <Button 
+                                variant="outline" 
+                                size="sm"
+                                onClick={() => {
+                                  setTimeout(() => {
+                                    const element = document.getElementById('battery-storage');
+                                    if (element) {
+                                      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                    }
+                                  }, 100);
+                                }}
+                                className="text-blue-600 border-blue-300 hover:opacity-90 transition-opacity"
+                              >
+                                <Battery className="w-3 h-3 mr-1" />
+                                Pack Confort
+                              </Button>
+                              <Button 
+                                variant="outline" 
+                                size="sm"
+                                onClick={() => {
+                                  setTimeout(() => {
+                                    const element = document.getElementById('smart-plugs');
+                                    if (element) {
+                                      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                    }
+                                  }, 100);
+                                }}
+                                className="text-red-600 border-red-300 hover:opacity-90 transition-opacity"
+                              >
+                                <Plug className="w-3 h-3 mr-1" />
+                                Pack Starter
+                              </Button>
+                            </>
+                          )}
+                          {product.id === 'battery-storage' && (
+                            <Button 
+                              variant="outline" 
+                              size="sm"
+                              onClick={() => {
+                                setTimeout(() => {
+                                  const element = document.getElementById('smart-plugs');
+                                  if (element) {
+                                    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                  }
+                                }, 100);
+                              }}
+                              className="text-red-600 border-red-300 hover:opacity-90 transition-opacity"
+                            >
+                              <Plug className="w-3 h-3 mr-1" />
+                              Pack Starter
+                            </Button>
+                          )}
+                        </div>
+                      </div>
+                    )}
 
                     {/* Fonctionnalités clés */}
                     <div className="w-full">
@@ -418,7 +440,7 @@ export default function EcosystemePage() {
                           <div className="w-full h-full bg-white/80 rounded-2xl flex items-center justify-center shadow-lg overflow-hidden">
                             <img 
                               src="/img/pack/plug.png" 
-                              alt="TruePower Switch - Prises intelligentes" 
+                              alt="Pack Starter - Prises intelligentes" 
                               className="w-full h-full object-contain p-6"
                             />
                           </div>
@@ -428,7 +450,7 @@ export default function EcosystemePage() {
                           <div className="w-full h-full bg-white/80 rounded-2xl flex items-center justify-center shadow-lg overflow-hidden">
                             <img 
                               src="/img/pack/battery-plug.webp" 
-                              alt="TruePower Bank - Batterie intelligente" 
+                              alt="Pack Confort - Batterie intelligente" 
                               className="w-full h-full object-contain p-6"
                             />
                           </div>
@@ -438,7 +460,7 @@ export default function EcosystemePage() {
                           <div className="w-full h-full bg-white/80 rounded-2xl flex items-center justify-center shadow-lg overflow-hidden">
                             <img 
                               src="/img/pack/carport.jpg" 
-                              alt="TruePower Prodigy - Carport solaire 6kW" 
+                              alt="Pack Family - Carport solaire 6kW" 
                               className="w-full h-full object-cover rounded-2xl"
                             />
                           </div>
@@ -470,14 +492,14 @@ export default function EcosystemePage() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px 0px" }}
+            viewport={{ once: true, margin: "-50px 0px" }}
             className="text-center mb-12"
           >
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
               Connectivité universelle
             </h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              Nos produits TruePower® sont conçus pour s'intégrer parfaitement dans votre écosystème domotique existant
+              Nos produits ABE sont conçus pour s'intégrer parfaitement dans votre écosystème domotique existant
             </p>
           </motion.div>
 
@@ -492,8 +514,8 @@ export default function EcosystemePage() {
                 key={index}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px 0px" }}
-                transition={{ delay: index * 0.1 }}
+                viewport={{ once: true, margin: "-50px 0px" }}
+                transition={{ delay: index * 0.05, duration: 0.5 }}
                 className="text-center group"
               >
                 <div className="inline-flex items-center justify-center w-16 h-16 bg-gray-100 rounded-2xl mb-4 group-hover:bg-emerald-100 transition-colors">
@@ -512,7 +534,7 @@ export default function EcosystemePage() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px 0px" }}
+            viewport={{ once: true, margin: "-50px 0px" }}
             className="mt-12 text-center"
           >
             <p className="text-gray-600 mb-6">
@@ -534,7 +556,7 @@ export default function EcosystemePage() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px 0px" }}
+            viewport={{ once: true, margin: "-50px 0px" }}
             className="space-y-8"
           >
             <div className="bg-white/90 backdrop-blur-md rounded-3xl p-8 border border-gray-200 shadow-lg">
@@ -542,11 +564,15 @@ export default function EcosystemePage() {
                 Prêt à transformer votre habitation ?
               </h2>
               <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8">
-                Découvrez comment l'écosystème TruePower™ peut réduire vos factures et augmenter vos revenus
+                Découvrez comment l'écosystème ABE peut réduire vos factures et augmenter vos revenus
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" className="group shadow-lg shadow-primary/20">
-                  Simuler mes économies
+                <Button 
+                  size="lg" 
+                  className="group shadow-lg shadow-primary/20"
+                  onClick={() => router.push('/simuler')}
+                >
+                  Simuler vos économies
                   <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Button>
                 <Button size="lg" variant="outline">

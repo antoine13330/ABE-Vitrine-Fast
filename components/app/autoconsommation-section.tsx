@@ -63,7 +63,7 @@ export default function AutoconsommationSection() {
     },
     {
       icon: Shield,
-      title: 'Sécurité juridique',
+      title: 'Cadre réglementaire clair',
       description: 'Cadre réglementaire clair pour tous les participants'
     },
     {
@@ -176,7 +176,7 @@ export default function AutoconsommationSection() {
           className="mb-16"
         >
           <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 text-center mb-8">
-            Cadre réglementaire sécurisé
+              Sécurité juridique
           </h3>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

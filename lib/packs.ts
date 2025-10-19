@@ -53,8 +53,8 @@ export const packs: Pack[] = [
     id: "family",
     title: "FAMILY",
     price: 0, // Sur mesure
-    priceLabel: "0€ abonnement 8 ans",
-    saving: "750 €/an",
+    priceLabel: "0€",
+      saving: "750 €/an | 75% du prix EDF",
     slogan: "Produisez votre énergie",
     icon: Home,
     features: [

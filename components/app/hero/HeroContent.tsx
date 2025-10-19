@@ -34,7 +34,7 @@ const HighlightedWord = ({ word, delay = 0.8 }: { word: string; delay?: number }
 
 // Composant pour le titre principal
 const MainTitle = () => {
-  const prefixText = "L'abri solaire ";
+  const prefixText = "Un abri solaire ";
   const middleText = " et l'énergie à ";
   const suffixText = " du prix EDF, ca vous dit ?";
 
@@ -84,7 +84,7 @@ const MainTitle = () => {
           transition={{ delay: 0.2, duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
           <h1 className="sr-only" id="hero-heading">
-            L'abri solaire gratuit et l'énergie à 75% du prix EDF, ca vous dit ?
+          Un abri solaire gratuit et l'énergie à 75% du prix EDF, ça vous dit ?
           </h1>
           <span 
             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white"

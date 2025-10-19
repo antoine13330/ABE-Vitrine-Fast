@@ -28,8 +28,8 @@ export default function HomePage() {
             <HeroBanner />
             <AutoconsommationSection />
             <StackedSections />
-            <EcosystemSection />
-            <Newsletter />
+            {/* <EcosystemSection />
+            <Newsletter /> */}
           </main>
         </>
       )}

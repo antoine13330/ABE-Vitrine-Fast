@@ -6,8 +6,38 @@ import { Battery, TrendingDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { packs } from "@/lib/packs";
+import { useRouter } from "next/navigation";
 
 export default function SolutionsCard() {
+  const router = useRouter();
+
+  const handleDetailsClick = (packId: string) => {
+    // Mapping des IDs de packs vers les IDs des sections dans la page écosystème
+    const packToSectionMap: { [key: string]: string } = {
+      'starter': 'smart-plugs',
+      'confort': 'battery-storage', 
+      'family': 'solar-carport'
+    };
+    
+    const sectionId = packToSectionMap[packId];
+    if (sectionId) {
+      router.push(`/ecosysteme`);
+      // Scroll vers la section après un délai plus long pour laisser le temps à la page de se charger
+      setTimeout(() => {
+        const scrollToSection = () => {
+          const element = document.getElementById(sectionId);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          } else {
+            // Si l'élément n'est pas trouvé, on réessaie après un court délai
+            setTimeout(scrollToSection, 100);
+          }
+        };
+        scrollToSection();
+      }, 500);
+    }
+  };
+
   return (
     <div className="bg-gradient-to-br from-gray-50 to-white relative overflow-hidden h-full">
       {/* Gradient lumineux animé */}
@@ -71,18 +101,6 @@ export default function SolutionsCard() {
 
       <div className="relative h-full flex flex-col justify-center px-4 sm:px-6 md:px-8 lg:px-12 py-6 sm:py-8">
         <div className="max-w-6xl mx-auto w-full">
-          {/* Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center gap-2 bg-primary/10 backdrop-blur-sm px-3 py-1.5 sm:px-4 sm:py-2 rounded-full mb-4 sm:mb-6 border border-primary/20"
-          >
-            <Battery className="w-3 h-3 sm:w-4 sm:h-4 text-primary" />
-            <span className="text-primary text-xs sm:text-sm font-semibold">
-              Comment?
-            </span>
-          </motion.div>
 
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -114,20 +132,23 @@ export default function SolutionsCard() {
                       : "bg-white/80 backdrop-blur-md border border-gray-200 hover:bg-white/90 hover:border-gray-300 hover:shadow-xl hover:shadow-gray-200/50"
                   )}
                 >
-                  {pack.highlight && (
-                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary px-4 py-1 rounded-full z-10">
+                  {/* {pack.highlight && (
+                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary px-4  rounded-full z-10">
                       <span className="text-white text-xs font-bold uppercase">
                         Recommandé
                       </span>
                     </div>
-                  )}
+                  )} */}
 
-                  <div className="p-3 sm:p-4 pt-6 sm:pt-8 flex-1 flex flex-col justify-between">
+                  <div className={cn(
+                    "p-3 pb-0 sm:p-4 flex-1 flex flex-col justify-between",
+                    pack.highlight ? "pt-6 sm:pt-8" : "pt-6 sm:pt-8"
+                  )}>
                     <div className="flex flex-col items-center flex-1 justify-center">
                       {/* Logo tout en haut */}
                       <div
                         className={cn(
-                          "p-2 sm:p-3 rounded-lg shadow-lg mb-4",
+                          "p-2 sm:p-3 rounded-lg shadow-lg  mb-2",
                           pack.highlight ? "bg-primary" : "bg-gray-100"
                         )}
                       >
@@ -138,39 +159,44 @@ export default function SolutionsCard() {
                           )}
                         />
                       </div>
-
-                      {/* Titre */}
-                      <div className="text-center mb-4">
-                        <div className="bg-primary/10 px-3 py-1 rounded-full inline-block mb-2">
+                      <div className="bg-primary/10 px-3 py-1 rounded-full inline-block mb-2">
                           <p className="text-primary text-sm sm:text-base font-bold uppercase tracking-wide">
                             PACK {pack.title}
                           </p>
                         </div>
-                        <h3 className="text-sm sm:text-base font-bold text-gray-900 uppercase tracking-tight leading-tight whitespace-nowrap">
-                          {pack.slogan}
-                        </h3>
+                      {/* Titre */}
+                      <div className="text-center mb-4 w-full">
+                        <div className="border-black border border-x-0 py-4 w-full mb-2">
+                          <h3 className="text-xl sm:text-2xl font-bold text-gray-900 uppercase tracking-tight leading-tight">
+                            {pack.slogan.split(' ')[0]}
+                          </h3>
+                          <p className="text-xl sm:text-2xl font-bold text-gray-900 uppercase tracking-tight leading-tight">
+                            {pack.slogan.split(' ').slice(1).join(' ')}
+                          </p>
+                        </div>
+                       
                       </div>
 
                       {/* Image du produit */}
-                      <div className="mb-4">
+                      <div className="mb-4 h-32 flex items-end justify-center">
                       {pack.id === "starter" ? (
-                        <div className="aspect-square w-full max-w-32 mx-auto rounded-lg overflow-hidden">
+                        <div className="w-full max-w-32 mx-auto rounded-lg overflow-hidden h-32 flex items-end justify-center">
                           <img
                             src="/img/pack/plug.png"
                             alt="Prises intelligentes Starter Pack"
-                            className="w-full h-full object-contain"
+                            className="w-full h-full object-contain object-bottom"
                           />
                         </div>
                       ) : pack.id === "confort" ? (
-                        <div className="aspect-square w-full max-w-32 mx-auto rounded-lg overflow-hidden">
+                        <div className="w-full max-w-32 mx-auto rounded-lg overflow-hidden h-32 flex items-end justify-center">
                           <img
                             src="/img/pack/battery-plug.webp"
                             alt="Batterie et prises Confort Pack"
-                            className="w-full h-full object-contain"
+                            className="w-full h-full object-contain object-bottom"
                           />
                         </div>
                       ) : pack.id === "family" ? (
-                        <div className="aspect-video w-full max-w-48 mx-auto rounded-lg overflow-hidden">
+                        <div className="w-full h-32 mx-auto rounded-lg overflow-hidden flex items-center justify-center">
                           {/* filter to make the image with more contrast and lowered brightness / highlights */}
                           <img
                             src="/img/pack/carport-above.jpg"
@@ -179,7 +205,7 @@ export default function SolutionsCard() {
                           />
                         </div>
                       ) : (
-                        <div className="aspect-square w-full max-w-32 mx-auto bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg flex items-center justify-center border-2 border-dashed border-gray-300">
+                        <div className="w-full max-w-32 mx-auto bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg flex items-end justify-center border-2 border-dashed border-gray-300 h-32">
                           <span className="text-gray-500 text-xs font-medium text-center px-2">
                             Image {pack.title}
                           </span>
@@ -188,17 +214,17 @@ export default function SolutionsCard() {
                       </div>
 
                       {/* Prix et économies en bas de l'image */}
-                      <div className="text-center mb-3">
-                        <p className="text-gray-900 text-xl sm:text-2xl font-black mb-2">
+                      <div className="text-center border-t border-black pt -2 w-full pt-4">
+                        <p className="text-gray-900 text-xl sm:text-2xl font-black">
                           {pack.priceLabel}
                         </p>
-                        <p className="text-green-600 text-sm sm:text-base font-semibold">
+                        {/* <p className="text-green-600 text-sm sm:text-base font-semibold">
                           Économies : {pack.saving}
-                        </p>
+                        </p> */}
                       </div>
 
                       {/* Point important pour Family Pack */}
-                      {pack.id === "family" && (
+                      {/* {pack.id === "family" && (
                         <div className="mb-2 sm:mb-3">
                           <div className="bg-green-100 border border-green-300 rounded-lg p-1 sm:p-1.5 text-center">
                             <p className="text-green-800 text-xs font-semibold">
@@ -206,148 +232,166 @@ export default function SolutionsCard() {
                             </p>
                           </div>
                         </div>
-                      )}
+                      )} */}
                     </div>
                   </div>
 
-                  {/* Section des fonctionnalités toujours visible */}
+                  {/* Section des fonctionnalités et équipements */}
                   <div className="border-t border-gray-200 bg-gray-50/50">
-                    <div className="p-3 sm:p-4">
+                    <div className="p-3 sm:p-4 text-center">
                       <h4 className="text-xs font-semibold text-gray-800 mb-2">
                         Fonctionnalités clés :
                       </h4>
-                      <ul className="space-y-1 text-xs text-gray-600 min-h-[120px]">
+                      <ul className="space-y-1 text-xs text-gray-600 mb-4 text-center">
                         {pack.id === "starter" && (
                           <>
-                            <li className="flex items-center gap-2">
+                            <li className="flex items-center justify-center gap-2">
                               <div className="w-1 h-1 bg-primary rounded-full flex-shrink-0" />
                               Contrôle intelligent de la consommation
                             </li>
-                            <li className="flex items-center gap-2">
+                            <li className="flex items-center justify-center gap-2">
                               <div className="w-1 h-1 bg-primary rounded-full flex-shrink-0" />
                               Optimisation automatique des coûts
                             </li>
-                            <li className="flex items-center gap-2">
-                              <div className="w-1 h-1 bg-primary rounded-full flex-shrink-0" />
-                              Installation en 1-2 jours
-                            </li>
-                            <li className="flex items-center gap-2">
+                            <li className="flex items-center justify-center gap-2">
                               <div className="w-1 h-1 bg-primary rounded-full flex-shrink-0" />
                               Surveillance temps réel
                             </li>
-                            <li className="flex items-center gap-2">
+                            <li className="flex items-center justify-center gap-2 opacity-0">
                               <div className="w-1 h-1 bg-primary rounded-full flex-shrink-0" />
-                              Contrôle à distance
+                              Espace pour alignement
                             </li>
                           </>
                         )}
                         {pack.id === "confort" && (
                           <>
-                            <li className="flex items-center gap-2">
+                            <li className="flex items-center justify-center gap-2">
                               <div className="w-1 h-1 bg-primary rounded-full flex-shrink-0" />
                               Stockage d'énergie solaire
                             </li>
-                            <li className="flex items-center gap-2">
+                            <li className="flex items-center justify-center gap-2">
                               <div className="w-1 h-1 bg-primary rounded-full flex-shrink-0" />
                               Autonomie renforcée
                             </li>
-                            <li className="flex items-center gap-2">
+                            <li className="flex items-center justify-center gap-2">
                               <div className="w-1 h-1 bg-primary rounded-full flex-shrink-0" />
-                              Gestion intelligente des pics
+                              Batterie 10 kWh
                             </li>
-                            <li className="flex items-center gap-2">
+                            <li className="flex items-center justify-center gap-2 opacity-0">
                               <div className="w-1 h-1 bg-primary rounded-full flex-shrink-0" />
-                              Batterie 2.5 kWh
-                            </li>
-                            <li className="flex items-center gap-2">
-                              <div className="w-1 h-1 bg-primary rounded-full flex-shrink-0" />
-                              Écran LED 5 pouces
+                              Espace pour alignement
                             </li>
                           </>
                         )}
                         {pack.id === "family" && (
                           <>
-                            <li className="flex items-center gap-2">
+                            <li className="flex items-center justify-center gap-2">
                               <div className="w-1 h-1 bg-primary rounded-full flex-shrink-0" />
-                              Production d'énergie complète
+                              Production d'énergie
                             </li>
-                            <li className="flex items-center gap-2">
+                            <li className="flex items-center justify-center gap-2">
                               <div className="w-1 h-1 bg-primary rounded-full flex-shrink-0" />
                               Solution collective intégrée
                             </li>
-                            <li className="flex items-center gap-2">
+                            <li className="flex items-center justify-center gap-2">
                               <div className="w-1 h-1 bg-primary rounded-full flex-shrink-0" />
-                              Accompagnement personnalisé
+                              Carport solaire 6kWc
                             </li>
-                            <li className="flex items-center gap-2">
+                            <li className="flex items-center justify-center gap-2 opacity-0">
                               <div className="w-1 h-1 bg-primary rounded-full flex-shrink-0" />
-                              Carport solaire 6kW
-                            </li>
-                            <li className="flex items-center gap-2">
-                              <div className="w-1 h-1 bg-primary rounded-full flex-shrink-0" />
-                              8000 kWh/an de production
+                              Espace pour alignement
                             </li>
                           </>
                         )}
                       </ul>
 
-                    {/* Équipements inclus */}
-                    <div className="mt-3 pt-3 border-t">
-                      <h4 className="text-xs font-semibold text-gray-800 mb-1.5">
-                        Équipements inclus :
-                      </h4>
-                      <div className="flex justify-center items-center gap-2 flex-wrap min-h-[2rem]">
-                        {pack.id === "starter" && (
-                          <Badge
-                            variant="secondary"
-                            className="bg-red-100 text-red-700 hover:bg-red-100"
-                          >
-                            Switch
-                          </Badge>
-                        )}
-                        {pack.id === "confort" && (
-                          <>
-                            <Badge
-                              variant="secondary"
-                              className="bg-red-100 text-red-700 hover:bg-red-100"
-                            >
-                              Switch
-                            </Badge>
-                            <Badge
-                              variant="secondary"
-                              className="bg-blue-100 text-blue-700 hover:bg-blue-100"
-                            >
-                              Bank
-                            </Badge>
-                          </>
-                        )}
-                        {pack.id === "family" && (
-                          <>
-                            <Badge
-                              variant="secondary"
-                              className="bg-red-100 text-red-700 hover:bg-red-100"
-                            >
-                              Switch
-                            </Badge>
-                            <Badge
-                              variant="secondary"
-                              className="bg-blue-100 text-blue-700 hover:bg-blue-100"
-                            >
-                              Bank
-                            </Badge>
-                            <Badge
-                              variant="secondary"
-                              className="bg-orange-100 text-orange-700 hover:bg-orange-100"
-                            >
-                              Prodigy
-                            </Badge>
-                          </>
-                        )}
+                   
+
+                      {/* Section Équipements inclus */}
+                      <div className="mb-4">
+                        <h4 className="text-xs font-semibold text-gray-800 mb-2">
+                          Équipements inclus :
+                        </h4>
+                        <ul className="space-y-1 text-xs text-gray-600">
+                          {pack.id === "starter" && (
+                            <>
+                              <li className="flex items-center justify-center gap-2">
+                                <div className="w-1 h-1 bg-primary rounded-full flex-shrink-0" />
+                                4 prises intelligentes
+                              </li>
+                              <li className="flex items-center justify-center gap-2">
+                                <div className="w-1 h-1 bg-primary rounded-full flex-shrink-0" />
+                                Système de contrôle et visualisation
+                              </li>
+                              <li className="flex items-center justify-center gap-2">
+                                <div className="w-1 h-1 bg-primary rounded-full flex-shrink-0" />
+                                Plug and play
+                              </li>
+                              <li className="flex items-center justify-center gap-2 opacity-0">
+                                <div className="w-1 h-1 bg-primary rounded-full flex-shrink-0" />
+                                Espace pour alignement
+                              </li>
+                            </>
+                          )}
+                          {pack.id === "confort" && (
+                            <>
+                              <li className="flex items-center justify-center gap-2">
+                                <div className="w-1 h-1 bg-primary rounded-full flex-shrink-0" />
+                                4 prises intelligentes
+                              </li>
+                              <li className="flex items-center justify-center gap-2">
+                                <div className="w-1 h-1 bg-primary rounded-full flex-shrink-0" />
+                                1 batterie 10kWh
+                              </li> 
+                              <li className="flex items-center justify-center gap-2">
+                                <div className="w-1 h-1 bg-primary rounded-full flex-shrink-0" />
+                                Installation incluse
+                              </li>
+                              <li className="flex items-center justify-center gap-2 opacity-0">
+                                <div className="w-1 h-1 bg-primary rounded-full flex-shrink-0" />
+                                Espace pour alignement
+                              </li>
+                            </>
+                          )}
+                          {pack.id === "family" && (
+                            <>
+                              <li className="flex items-center justify-center gap-2">
+                                <div className="w-1 h-1 bg-primary rounded-full flex-shrink-0" />
+                                4 prises intelligentes
+                              </li>
+                              <li className="flex items-center justify-center gap-2">
+                                <div className="w-1 h-1 bg-primary rounded-full flex-shrink-0" />
+                                1 batterie 10kWh
+                              </li>
+                              <li className="flex items-center justify-center gap-2">
+                                <div className="w-1 h-1 bg-primary rounded-full flex-shrink-0" />
+                                1 carport solaire 6kWc avec installation
+                              </li>
+                              <li className="flex items-center justify-center gap-2 opacity-0">
+                                <div className="w-1 h-1 bg-primary rounded-full flex-shrink-0" />
+                                Espace pour alignement
+                              </li>
+                            </>
+                          )}
+                        </ul>
                       </div>
-                    </div>
-                      <div className="mt-3 pt-3 border-t border-gray-200">
+
+                      
+                         {/* Section Économies */}
+                         <div className="mb-4 text-center">
+                        <h4 className="text-xs font-semibold text-gray-800 mb-2">
+                          Économies :
+                        </h4>
+                        <ul className="space-y-1 text-xl text-green-600 font-bold">
+                          <li className="flex items-center justify-center gap-2">
+                            
+                            {pack.saving}
+                          </li>
+                        </ul>
+                      </div>
+                      <div className="mt-3 flex gap-2">
                         <Button
-                          className="w-full text-xs sm:text-sm"
+                          className="flex-1 text-xs sm:text-sm"
                           onClick={() => {
                             const message = `Bonjour, je suis intéressé(e) par le pack ${pack.title.toUpperCase()}. Pourriez-vous me donner plus d'informations ?`;
                             const encodedMessage = encodeURIComponent(message);
@@ -358,6 +402,13 @@ export default function SolutionsCard() {
                           }}
                         >
                           Choisir cette offre
+                        </Button>
+                        <Button
+                          variant="outline"
+                          className="flex-1 text-xs sm:text-sm"
+                          onClick={() => handleDetailsClick(pack.id)}
+                        >
+                          Détails
                         </Button>
                       </div>
                     </div>

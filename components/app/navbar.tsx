@@ -10,7 +10,7 @@ import { Button } from '../ui/button'
 const navLinks = [
   { name: 'Accueil', href: '/' },
   { name: 'À propos', href: '/about' },
-  { name: 'Écosystème TruePower™', href: '/ecosysteme' },
+  { name: 'Offres', href: '/ecosysteme' },
   { name: 'Simuler', href: '/simuler' },
   { name: 'Logiciels', href: '/logiciels' },
   { name: 'Professionnel', href: '/professionnel' },
@@ -64,8 +64,8 @@ export default function Navbar() {
             <Link href="/" className="flex items-center gap-3 relative z-[100]" aria-label="Retour à l'accueil - ABE Metasystems">
               <Image
                 src="/img/ABE_LOGO/LOGO ABE WEB/abe_logo_64X64.png"
-                width={64}
-                height={64}
+                width={80}
+                height={80}
                 alt="Logo ABE Metasystems"
               />
             </Link>
